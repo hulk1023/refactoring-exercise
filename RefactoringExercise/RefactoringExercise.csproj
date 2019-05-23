@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2904B49E-2C8A-4C5E-BA0B-268102F423DE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RefactoringExercise</RootNamespace>
+    <AssemblyName>RefactoringExercise</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dapper">
+      <HintPath>Exercise1\References\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="TiBookMakerCom.Standard">
+      <HintPath>Exercise1\References\TiBookMakerCom.Standard.dll</HintPath>
+    </Reference>
+    <Reference Include="TiDAL.Base.Standard">
+      <HintPath>Exercise1\References\TiDAL.Base.Standard.dll</HintPath>
+    </Reference>
+    <Reference Include="TiDAL.Standard">
+      <HintPath>Exercise1\References\TiDAL.Standard.dll</HintPath>
+    </Reference>
+    <Reference Include="TiTSCom.Standard">
+      <HintPath>Exercise1\References\TiTSCom.Standard.dll</HintPath>
+    </Reference>
+    <Reference Include="TiUtil">
+      <HintPath>Exercise1\References\TiUtil.dll</HintPath>
+    </Reference>
+    <Reference Include="TiUtil.Standard">
+      <HintPath>Exercise1\References\TiUtil.Standard.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Exercise1\IResultRepo.cs" />
+    <Compile Include="Exercise1\MatchResult.cs" />
+    <Compile Include="Exercise1\OutrightResult.cs" />
+    <Compile Include="Exercise1\Repo.cs" />
+    <Compile Include="Exercise1\RepoFactory.cs" />
+    <Compile Include="Exercise1\ResultRepo.cs" />
+    <Compile Include="Exercise1\ResultScheduler.cs" />
+    <Compile Include="Exercise1\TiCOResultCache.cs" />
+    <Compile Include="Exercise2\OddsUpdateType.cs" />
+    <Compile Include="Exercise2\Order.cs" />
+    <Compile Include="Exercise2\SingleOrder.cs" />
+    <Compile Include="Exercise2\SingleOrderRequest.cs" />
+    <Compile Include="Exercise2\TiEnumDisplayType.cs" />
+    <Compile Include="Exercise2\TiOddsFormatter.cs" />
+    <Compile Include="Exercise2\TiOddsHelper.cs" />
+    <Compile Include="Exercise2\TypeMappingExtension.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Exercise1\ReadMe.txt" />
+    <Content Include="Exercise2\ReadMe.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
