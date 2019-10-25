@@ -106,7 +106,7 @@ namespace RefactoringExercise.Tests.Exercise1
 
         private void GivenResultInCacheAs(List<MatchResult> matchResults, List<OutrightResult> outrightResults)
         {
-            GivenResultsAs((_matchResults, _outrightResults));
+            GivenResultsAs((matchResults, outrightResults));
 
             WhenInsertToResultCache();
         }
