@@ -23,8 +23,8 @@ namespace RefactoringExercise.Tests.Exercise1
         [SetUp]
         public void Setup()
         {
-            TiCoResultCache.MatchResults.Clear();
-            TiCoResultCache.OutrightResults.Clear();
+            //TiCoResultCache.MatchResults.Clear();
+            //TiCoResultCache.OutrightResults.Clear();
 
             _matchResults = new List<MatchResult>()
             {
@@ -37,7 +37,7 @@ namespace RefactoringExercise.Tests.Exercise1
             };
         }
 
-        [Test]
+        [Test, Order(1)]
         public void resultcache_is_insert_correctly()
         {
 
@@ -48,7 +48,7 @@ namespace RefactoringExercise.Tests.Exercise1
             ShouldInsertCorrectly();
         }
 
-        [Test]
+        [Test, Order(2)]
         public void resultcache_is_update_correctly()
         {
             GivenResultInCacheAs(_matchResults, _outrightResults);
@@ -61,7 +61,7 @@ namespace RefactoringExercise.Tests.Exercise1
 
         }
 
-        [Test]
+        [Test, Order(3)]
         public void resultcache_is_get_correctly()
         {
             GivenResultInCacheAs(_matchResults, _outrightResults);
@@ -84,8 +84,16 @@ namespace RefactoringExercise.Tests.Exercise1
 
         private void ShouldUpdateCorrectly(string expected)
         {
-            TiCoResultCache.MatchResults[TiEnumSportType.Soccer][1][1].EventStatus.Should().Be(expected);
-            TiCoResultCache.OutrightResults[TiEnumSportType.Soccer][1][1].OddsStatus.Should().Be(expected);
+
+            var result = TiCoResultCache.GetMatchResultsBy((TiEnumSportType)_matchResults[0].SportId, _matchResults[0].LeagueId,
+                _matchResults[0].EventDate);
+            result.Single().EventStatus.Should().Be(expected);
+
+
+            var resultOr = TiCoResultCache.GetOutrightResultsBy((TiEnumSportType)_outrightResults[0].SportId, _outrightResults[0].LeagueId,
+                _outrightResults[0].EventDate);
+            resultOr.Single().OddsStatus.Should().Be(expected);
+
 
         }
 
@@ -114,11 +122,16 @@ namespace RefactoringExercise.Tests.Exercise1
 
         private void ShouldInsertCorrectly()
         {
-            TiCoResultCache.MatchResults[TiEnumSportType.Soccer].Count.Should().Be(_matchResults.Count);
-            TiCoResultCache.MatchResults[TiEnumSportType.Soccer][1][1].MatchResultId.Should().Be(
-                _matchResults.Count(x => x.SportId == 1 && x.LeagueId == 1 && x.MatchResultId == 1));
-            TiCoResultCache.OutrightResults[TiEnumSportType.Soccer].Count.Should().Be(_outrightResults.Count);
-            TiCoResultCache.OutrightResults[TiEnumSportType.Soccer][1][1].Orid.Should().Be(_outrightResults.Count(x => x.SportId == 1 && x.LeagueId == 1 && x.Orid == 1));
+            var result = TiCoResultCache.GetMatchResultsBy((TiEnumSportType)_matchResults[0].SportId, 1,
+                _matchResults[0].EventDate);
+
+            result.Count().Should().Be(_matchResults.Count(x => x.SportId == 1 && x.LeagueId == 1 && x.MatchResultId == 1));
+
+
+            var resultOr = TiCoResultCache.GetOutrightResultsBy((TiEnumSportType)_outrightResults[0].SportId, 1,
+                _outrightResults[0].EventDate);
+
+            resultOr.Count().Should().Be(_outrightResults.Count(x => x.SportId == 1 && x.LeagueId == 1 && x.Orid == 1));
         }
 
         private void WhenInsertToResultCache()
