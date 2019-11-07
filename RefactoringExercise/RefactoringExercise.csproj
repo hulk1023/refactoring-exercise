@@ -97,12 +97,16 @@
     <Compile Include="Exercise2\TiOddsFormatter.cs" />
     <Compile Include="Exercise2\TiOddsHelper.cs" />
     <Compile Include="Exercise2\TypeMappingExtension.cs" />
+    <Compile Include="Exercise3\ShippingLabelPrinter.cs" />
+    <Compile Include="OptionParameterIssue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReduceCodeComplexity1.cs" />
     <Compile Include="Tests\Exercise1\ResultCacheTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Exercise1\ReadMe.txt" />
     <Content Include="Exercise2\ReadMe.txt" />
+    <Content Include="Exercise3\ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
