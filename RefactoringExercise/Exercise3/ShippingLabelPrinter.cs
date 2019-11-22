@@ -17,6 +17,16 @@ namespace RefactoringExercise.Exercise3
         {
             var printer = new Printer(printerConfig.Port);
 
+            var lines = LabelFormatOfAddress(address);
+
+            foreach (var line in lines)
+            {
+                printer.PrintLine(line);
+            }
+        }
+
+        private static List<string> LabelFormatOfAddress(Address address)
+        {
             var addressFormat = new AddressFormat();
             addressFormat.Font = "Times New Roman";
             addressFormat.FontSize = 24;
@@ -30,10 +40,12 @@ namespace RefactoringExercise.Exercise3
                 addressFormat.FontSize = 18;
                 addressFormat.LineSpacing = 8;
             }
+
             if (address.CountryCode == "IT")
             {
                 town = town.ToUpper();
             }
+
             if (address.CountryCode == "IR")
             {
                 addressFormat.RightToLeft = true;
@@ -54,11 +66,7 @@ namespace RefactoringExercise.Exercise3
                 lines.Add(address.District.ToUpper());
             lines.Add(address.PostalCode);
             lines.Add(address.Country.ToUpper());
-
-            foreach (var line in lines)
-            {
-                printer.PrintLine(line);
-            }
+            return lines;
         }
     }
 
