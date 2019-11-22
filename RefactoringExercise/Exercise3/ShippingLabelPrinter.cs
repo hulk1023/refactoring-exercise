@@ -18,32 +18,6 @@ namespace RefactoringExercise.Exercise3
             var printer = new Printer(printerConfig.Port);
 
             var addressFormat = new AddressFormat();
-            printer.Font = "Times New Roman";
-            printer.FontSize = 24;
-            printer.LineSpacing = 6;
-
-            string town = address.Town;
-            bool printDistrict = true;
-            if (address.CountryCode == "CH")
-            {
-                printer.Font = "Kai Bold";
-                printer.FontSize = 18;
-                printer.LineSpacing = 8;
-            }
-            if (address.CountryCode == "IT")
-            {
-                town = town.ToUpper();
-            }
-            if (address.CountryCode == "IR")
-            {
-                printer.RightToLeft = true;
-                printer.FontSize = 15;
-                if (address.District == address.Town)
-                {
-                    printDistrict = false;
-                }
-            }
-
             addressFormat.Font = "Times New Roman";
             addressFormat.FontSize = 24;
             addressFormat.LineSpacing = 6;
