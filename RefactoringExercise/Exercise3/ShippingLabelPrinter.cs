@@ -9,7 +9,7 @@ namespace RefactoringExercise.Exercise3
         AddressFormat LabelFormatOfAddress(Address address);
     }
 
-    class AddressFormatter
+    class AddressFormatter : IAddressFormatter
     {
         public AddressFormatter()
         {
