@@ -4,6 +4,11 @@ using System.IO;
 
 namespace RefactoringExercise.Exercise3
 {
+    internal interface IAddressFormatter
+    {
+        AddressFormat LabelFormatOfAddress(Address address);
+    }
+
     class ShippingLabelPrinter
     {
         private readonly PrinterConfig printerConfig;
@@ -25,7 +30,7 @@ namespace RefactoringExercise.Exercise3
             }
         }
 
-        private AddressFormat LabelFormatOfAddress(Address address)
+        public AddressFormat LabelFormatOfAddress(Address address)
         {
             var addressFormat = new AddressFormat();
             addressFormat.Font = "Times New Roman";
