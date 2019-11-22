@@ -54,6 +54,15 @@ namespace RefactoringExercise.Exercise3
             printer.PrintLine(address.PostalCode);
             printer.PrintLine(address.Country.ToUpper());
 
+            lines.Add(address.Name + ",");
+            lines.Add(address.AddressLine1 + ",");
+            if (!String.IsNullOrEmpty(address.AddressLine2))
+                lines.Add(address.AddressLine2 + ",");
+            lines.Add(town + ",");
+            if (printDistrict)
+                lines.Add(address.District.ToUpper());
+            lines.Add(address.PostalCode);
+            lines.Add(address.Country.ToUpper());
         }
     }
 
