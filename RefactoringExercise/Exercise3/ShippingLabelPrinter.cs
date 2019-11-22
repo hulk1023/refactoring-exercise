@@ -9,25 +9,10 @@ namespace RefactoringExercise.Exercise3
         AddressFormat LabelFormatOfAddress(Address address);
     }
 
-    class ShippingLabelPrinter
+    class AddressFormatter
     {
-        private readonly PrinterConfig printerConfig;
-
-        public ShippingLabelPrinter()
+        public AddressFormatter()
         {
-            printerConfig = PrinterConfig.Instance;
-        }
-
-        public void PrintLabel(Address address)
-        {
-            var printer = new Printer(printerConfig.Port);
-
-            var addressFormat = LabelFormatOfAddress(address);
-
-            foreach (var line in addressFormat.Lines)
-            {
-                printer.PrintLine(line);
-            }
         }
 
         public AddressFormat LabelFormatOfAddress(Address address)
@@ -72,6 +57,30 @@ namespace RefactoringExercise.Exercise3
             addressFormat.Lines.Add(address.PostalCode);
             addressFormat.Lines.Add(address.Country.ToUpper());
             return addressFormat;
+        }
+    }
+
+    class ShippingLabelPrinter
+    {
+        private readonly PrinterConfig printerConfig;
+        private readonly AddressFormatter _addressFormatter;
+
+        public ShippingLabelPrinter()
+        {
+            printerConfig = PrinterConfig.Instance;
+            _addressFormatter = new AddressFormatter();
+        }
+
+        public void PrintLabel(Address address)
+        {
+            var printer = new Printer(printerConfig.Port);
+
+            var addressFormat = _addressFormatter.LabelFormatOfAddress(address);
+
+            foreach (var line in addressFormat.Lines)
+            {
+                printer.PrintLine(line);
+            }
         }
     }
 
