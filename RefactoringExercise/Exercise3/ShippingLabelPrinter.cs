@@ -56,7 +56,7 @@ namespace RefactoringExercise.Exercise3
                 }
             }
 
-            var lines = new List<string>();
+            addressFormat.Lines = new List<string>();
             lines.Add(address.Name + ",");
             lines.Add(address.AddressLine1 + ",");
             if (!String.IsNullOrEmpty(address.AddressLine2))
@@ -76,6 +76,7 @@ namespace RefactoringExercise.Exercise3
         public int FontSize { get; set; }
         public int LineSpacing { get; set; }
         public bool RightToLeft { get; set; }
+        public List<string> Lines { get; set; }
     }
 
 
