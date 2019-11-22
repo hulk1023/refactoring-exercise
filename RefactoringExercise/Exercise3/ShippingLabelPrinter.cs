@@ -90,6 +90,10 @@ namespace RefactoringExercise.Exercise3
 
     internal class AddressFormat
     {
+        public string Font { get; set; }
+        public int FontSize { get; set; }
+        public int LineSpacing { get; set; }
+        public bool RightToLeft { get; set; }
     }
 
 
