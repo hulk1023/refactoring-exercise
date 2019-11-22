@@ -44,8 +44,33 @@ namespace RefactoringExercise.Exercise3
                 }
             }
 
-            var lines = new List<string>();
+            addressFormat.Font = "Times New Roman";
+            addressFormat.FontSize = 24;
+            addressFormat.LineSpacing = 6;
 
+            string town = address.Town;
+            bool printDistrict = true;
+            if (address.CountryCode == "CH")
+            {
+                addressFormat.Font = "Kai Bold";
+                addressFormat.FontSize = 18;
+                addressFormat.LineSpacing = 8;
+            }
+            if (address.CountryCode == "IT")
+            {
+                town = town.ToUpper();
+            }
+            if (address.CountryCode == "IR")
+            {
+                addressFormat.RightToLeft = true;
+                addressFormat.FontSize = 15;
+                if (address.District == address.Town)
+                {
+                    printDistrict = false;
+                }
+            }
+
+            var lines = new List<string>();
             lines.Add(address.Name + ",");
             lines.Add(address.AddressLine1 + ",");
             if (!String.IsNullOrEmpty(address.AddressLine2))
