@@ -17,9 +17,9 @@ namespace RefactoringExercise.Exercise3
         {
             var printer = new Printer(printerConfig.Port);
 
-            var lines = LabelFormatOfAddress(address);
+            var addressFormat = LabelFormatOfAddress(address);
 
-            foreach (var line in lines)
+            foreach (var line in addressFormat.Lines)
             {
                 printer.PrintLine(line);
             }
