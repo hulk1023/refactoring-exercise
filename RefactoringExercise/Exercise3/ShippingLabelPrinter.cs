@@ -63,12 +63,10 @@ namespace RefactoringExercise.Exercise3
     class ShippingLabelPrinter
     {
         private readonly PrinterConfig printerConfig;
-        private readonly AddressFormatter _addressFormatter;
 
         public ShippingLabelPrinter()
         {
             printerConfig = PrinterConfig.Instance;
-            _addressFormatter = new AddressFormatter();
         }
 
         public void PrintLabel(Address address)
