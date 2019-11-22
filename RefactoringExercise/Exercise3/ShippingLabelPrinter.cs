@@ -44,16 +44,6 @@ namespace RefactoringExercise.Exercise3
 
             var lines = new List<string>();
 
-            printer.PrintLine(address.Name + ",");
-            printer.PrintLine(address.AddressLine1 + ",");
-            if (!String.IsNullOrEmpty(address.AddressLine2))
-                printer.PrintLine(address.AddressLine2 + ",");
-            printer.PrintLine(town + ",");
-            if (printDistrict)
-                printer.PrintLine(address.District.ToUpper());
-            printer.PrintLine(address.PostalCode);
-            printer.PrintLine(address.Country.ToUpper());
-
             lines.Add(address.Name + ",");
             lines.Add(address.AddressLine1 + ",");
             if (!String.IsNullOrEmpty(address.AddressLine2))
@@ -63,6 +53,11 @@ namespace RefactoringExercise.Exercise3
                 lines.Add(address.District.ToUpper());
             lines.Add(address.PostalCode);
             lines.Add(address.Country.ToUpper());
+
+            foreach (var line in lines)
+            {
+                printer.PrintLine(line);
+            }
         }
     }
 
