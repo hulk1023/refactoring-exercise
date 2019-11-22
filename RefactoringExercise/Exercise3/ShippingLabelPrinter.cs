@@ -25,7 +25,7 @@ namespace RefactoringExercise.Exercise3
             }
         }
 
-        private static List<string> LabelFormatOfAddress(Address address)
+        private AddressFormat LabelFormatOfAddress(Address address)
         {
             var addressFormat = new AddressFormat();
             addressFormat.Font = "Times New Roman";
@@ -66,7 +66,7 @@ namespace RefactoringExercise.Exercise3
                 addressFormat.Lines.Add(address.District.ToUpper());
             addressFormat.Lines.Add(address.PostalCode);
             addressFormat.Lines.Add(address.Country.ToUpper());
-            return lines;
+            return addressFormat;
         }
     }
 
