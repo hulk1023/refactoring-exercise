@@ -16,6 +16,8 @@ namespace RefactoringExercise.Exercise3
         public void PrintLabel(Address address)
         {
             var printer = new Printer(printerConfig.Port);
+
+            var addressFormat = new AddressFormat();
             printer.Font = "Times New Roman";
             printer.FontSize = 24;
             printer.LineSpacing = 6;
@@ -61,8 +63,9 @@ namespace RefactoringExercise.Exercise3
         }
     }
 
-
-
+    internal class AddressFormat
+    {
+    }
 
 
     internal class PrinterConfig
