@@ -57,15 +57,15 @@ namespace RefactoringExercise.Exercise3
             }
 
             addressFormat.Lines = new List<string>();
-            lines.Add(address.Name + ",");
-            lines.Add(address.AddressLine1 + ",");
+            addressFormat.Lines.Add(address.Name + ",");
+            addressFormat.Lines.Add(address.AddressLine1 + ",");
             if (!String.IsNullOrEmpty(address.AddressLine2))
-                lines.Add(address.AddressLine2 + ",");
-            lines.Add(town + ",");
+                addressFormat.Lines.Add(address.AddressLine2 + ",");
+            addressFormat.Lines.Add(town + ",");
             if (printDistrict)
-                lines.Add(address.District.ToUpper());
-            lines.Add(address.PostalCode);
-            lines.Add(address.Country.ToUpper());
+                addressFormat.Lines.Add(address.District.ToUpper());
+            addressFormat.Lines.Add(address.PostalCode);
+            addressFormat.Lines.Add(address.Country.ToUpper());
             return lines;
         }
     }
