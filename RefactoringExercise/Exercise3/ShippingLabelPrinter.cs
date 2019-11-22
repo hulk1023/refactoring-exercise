@@ -1,59 +1,106 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace RefactoringExercise.Exercise3
 {
-    class ShippingLabelPrinter
+    internal interface IAddressLabelFormatter
     {
-        private readonly PrinterConfig printerConfig;
+        AddressLabelFormat GetAddressLabelFormat(Address address);
+    }
 
-        public ShippingLabelPrinter()
+    class AddressLabelFormatter : IAddressLabelFormatter
+    {
+        public AddressLabelFormatter()
         {
-            printerConfig = PrinterConfig.Instance;
         }
 
-        public void PrintLabel(Address address)
+        public AddressLabelFormat GetAddressLabelFormat(Address address)
         {
-            var printer = new Printer(printerConfig.Port);
-            printer.Font = "Times New Roman";
-            printer.FontSize = 24;
-            printer.LineSpacing = 6;
+            var addressLabelFormat = new AddressLabelFormat();
+
+            addressLabelFormat.Font = "Times New Roman";
+            addressLabelFormat.FontSize = 24;
+            addressLabelFormat.LineSpacing = 6;
 
             string town = address.Town;
             bool printDistrict = true;
             if (address.CountryCode == "CH")
             {
-                printer.Font = "Kai Bold";
-                printer.FontSize = 18;
-                printer.LineSpacing = 8;
+                addressLabelFormat.Font = "Kai Bold";
+                addressLabelFormat.FontSize = 18;
+                addressLabelFormat.LineSpacing = 8;
             }
+
             if (address.CountryCode == "IT")
             {
                 town = town.ToUpper();
             }
+
             if (address.CountryCode == "IR")
             {
-                printer.RightToLeft = true;
-                printer.FontSize = 15;
+                addressLabelFormat.RightToLeft = true;
+                addressLabelFormat.FontSize = 15;
                 if (address.District == address.Town)
                 {
                     printDistrict = false;
                 }
             }
-            printer.PrintLine(address.Name + ",");
-            printer.PrintLine(address.AddressLine1 + ",");
+
+            var lines = new List<string>();
+            addressLabelFormat.Lines = lines;
+            lines.Add(address.Name + ",");
+            lines.Add(address.AddressLine1 + ",");
             if (!String.IsNullOrEmpty(address.AddressLine2))
-                printer.PrintLine(address.AddressLine2 + ",");
-            printer.PrintLine(town + ",");
+                lines.Add(address.AddressLine2 + ",");
+            lines.Add(town + ",");
             if (printDistrict)
-                printer.PrintLine(address.District.ToUpper());
-            printer.PrintLine(address.PostalCode);
-            printer.PrintLine(address.Country.ToUpper());
+                lines.Add(address.District.ToUpper());
+            lines.Add(address.PostalCode);
+            lines.Add(address.Country.ToUpper());
+            return addressLabelFormat;
         }
     }
 
+    class ShippingLabelPrinter
+    {
+        private readonly PrinterConfig printerConfig;
+        private readonly IAddressLabelFormatter _addressLabelFormatter;
 
+        public ShippingLabelPrinter(): this(new AddressLabelFormatter())
+        {
+            
+        }
 
+        public ShippingLabelPrinter(IAddressLabelFormatter addressLabelFormatter)
+        {
+            _addressLabelFormatter = addressLabelFormatter;
+            printerConfig = PrinterConfig.Instance;
+        }
+
+        public void PrintLabel(Address address)
+        {
+            var addressLabelFormat = _addressLabelFormatter.GetAddressLabelFormat(address);
+
+            var printer = new Printer(printerConfig.Port);
+            printer.Font = addressLabelFormat.Font;
+            printer.FontSize = addressLabelFormat.FontSize;
+            printer.LineSpacing = addressLabelFormat.LineSpacing;
+            foreach (var line in addressLabelFormat.Lines)
+            {
+                printer.PrintLine(line);
+            }
+        }
+    }
+
+    internal class AddressLabelFormat
+    {
+        public string Font { get; set; }
+        public int FontSize { get; set; }
+        public int LineSpacing { get; set; }
+        public bool RightToLeft { get; set; }
+        public List<string> Lines { get; set; }
+    }
 
 
     internal class PrinterConfig
